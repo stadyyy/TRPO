@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заболевания и Анализы</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .disease-list, .analysis-list {
+            margin-top: 30px;
+        }
+        .disease-item, .analysis-item {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .disease-item h3, .analysis-item h4 {
+            margin: 0;
+            color: #0056b3;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Перечень заболеваний</h1>
+    <div class="disease-list">
+        {% for disease in diseases %}
+            <div class="disease-item">
+                <h3>{{ disease.keyword }}</h3>
+                <p><strong>Описание:</strong> {{ disease.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Список анализов</h2>
+    <div class="analysis-list">
+        {% for analysis in analyses %}
+            <div class="analysis-item">
+                <h4>Анализ {{ loop.index }}</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Параметр</th>
+                                <th>Результат</th>
+                                <th>Рекомендация</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in analysis %}
+                                <tr>
+                                    <td>{{ item.parameter }}</td>
+                                    <td>{{ item.value }}</td>
+                                    <td>{{ item.description }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
